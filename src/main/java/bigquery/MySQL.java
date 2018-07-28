@@ -40,15 +40,15 @@ public class MySQL {
         }
 	}
     
-	public void insertMeans(TableResult response, int idx){
+	public void insertTotals(TableResult response, int idx){
 		System.out.println("Means : Insert開始");
 		
 		for (FieldValueList row : response.iterateAll()) {
 			StringBuffer buf = new StringBuffer();
-			buf.append("INSERT INTO means(query_id, row, column, value) VALUES");
+			buf.append("INSERT INTO totals(`query_id` ,  `row` ,  `column` ,  `value`) VALUES");
 			for(int j = 0; j < column; j++) {
-				if(j == column -1) buf.append("("+query_id+","+idx+","+j+","+row.get("sum"+j)+")");
-				else buf.append("("+query_id+","+idx+","+j+","+row.get("sum"+j)+"),");
+				if(j == column -1) buf.append("("+query_id+","+idx+","+(j+1)+","+row.get("sum"+j).getValue()+")");
+				else buf.append("("+query_id+","+idx+","+(j+1)+","+row.get("sum"+j).getValue()+"),");
 			}	
 			String sql = buf.toString();
 			System.out.println(sql);
