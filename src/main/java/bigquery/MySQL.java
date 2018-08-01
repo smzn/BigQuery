@@ -41,7 +41,7 @@ public class MySQL {
 	}
     
 	public void insertTotals(TableResult response, int idx){
-		System.out.println("Means : Insert開始");
+		System.out.println("Totals : Insert開始");
 		
 		for (FieldValueList row : response.iterateAll()) {
 			StringBuffer buf = new StringBuffer();
@@ -60,8 +60,27 @@ public class MySQL {
 			}
             System.out.println("Insert完了");
 		}
-		
 	}
 	
+	public void selectTotals() {
+		String sql = "select * FROM totals";
+        ResultSet rscount;
+        try {
+        		System.out.println("start");
+			rscount = stmt.executeQuery(sql);
+			System.out.println("end");
+			while(rs.next()){
+				int id = rs.getInt("id");
+				int query_id = rs.getInt("query_id");
+				int row = rs.getInt("row");
+				int column = rs.getInt("column");
+				double value = rs.getDouble("value");
+				System.out.println(id+":【"+ query_id +"】\n" + row + "\n"+ column+"\n"+ value+"\n");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 }
